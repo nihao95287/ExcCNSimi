@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://c1c7i2s36l77u"]
+
+[ext_resource type="Script" uid="uid://tnegvlil0l6i" path="res://scripts/ui/Menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" uid="uid://dhyvvhexpuija" path="res://art/Menu/Menu_0.png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://4d4u4q3k2vwp" path="res://art/Button0.png" id="3_btn_normal"]
+[ext_resource type="Texture2D" uid="uid://qblxfy757a5o" path="res://art/Button1.png" id="4_btn_pressed"]
+[ext_resource type="Texture2D" uid="uid://d3yiwbgx5r1me" path="res://art/Menu/Title.png" id="5_title"]
+[ext_resource type="Texture2D" uid="uid://dp6c34wx868o3" path="res://art/Menu/18-.png" id="6_age"]
+[ext_resource type="FontFile" uid="uid://csxuowuljxdor" path="res://Font/ZhiMangXing-Regular.ttf" id="7_font"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_normal"]
+texture = ExtResource("3_btn_normal")
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_pressed"]
+texture = ExtResource("4_btn_pressed")
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_hover"]
+texture = ExtResource("3_btn_normal")
+
+[node name="Menu" type="Node2D" unique_id=2088537944]
+script = ExtResource("1_menu")
+
+[node name="BackRect" type="TextureRect" parent="." unique_id=1065371358]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = 3.0
+offset_right = 2800.0
+offset_bottom = 1608.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+stretch_mode = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2020596111]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 420.0
+offset_top = 267.0
+offset_right = 2208.0
+offset_bottom = 1287.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer" unique_id=1692168785]
+custom_minimum_size = Vector2(600, 700)
+layout_mode = 2
+
+[node name="TitleRect" type="TextureRect" parent="CenterContainer/VBox" unique_id=660902637]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("5_title")
+stretch_mode = 5
+
+[node name="Spacer" type="Control" parent="CenterContainer/VBox" unique_id=1887269449]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+
+[node name="Start_Button" type="Button" parent="CenterContainer/VBox" unique_id=77550191]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_font")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBox_normal")
+theme_override_styles/pressed = SubResource("StyleBox_pressed")
+theme_override_styles/hover = SubResource("StyleBox_hover")
+text = "开天辟地"
+
+[node name="Continue_Button" type="Button" parent="CenterContainer/VBox" unique_id=389019958]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_font")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBox_normal")
+theme_override_styles/pressed = SubResource("StyleBox_pressed")
+theme_override_styles/hover = SubResource("StyleBox_hover")
+text = "再续前程"
+
+[node name="Settings_Button" type="Button" parent="CenterContainer/VBox" unique_id=1887525124]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_font")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBox_normal")
+theme_override_styles/pressed = SubResource("StyleBox_pressed")
+theme_override_styles/hover = SubResource("StyleBox_hover")
+text = "乾坤再造"
+
+[node name="Exit_Button" type="Button" parent="CenterContainer/VBox" unique_id=1916552228]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_font")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBox_normal")
+theme_override_styles/pressed = SubResource("StyleBox_pressed")
+theme_override_styles/hover = SubResource("StyleBox_hover")
+text = "退隐江湖"
+
+[node name="Spacer2" type="Control" parent="CenterContainer/VBox" unique_id=205806618]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="AgeRating" type="TextureRect" parent="." unique_id=33256946]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -167.0
+offset_right = 233.0
+offset_bottom = -7.0
+grow_vertical = 0
+texture = ExtResource("6_age")
+expand_mode = 1

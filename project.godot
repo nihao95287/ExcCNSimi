@@ -1,0 +1,49 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="dagame"
+run/main_scene="res://scenes/Menu.tscn"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+SettingsManager="*res://scripts/core/SettingsManager.gd"
+EventBus="*res://scripts/core/EventBus.gd"
+GameManager="*res://scripts/managers/GameManager.gd"
+InventoryManager="*res://scripts/managers/InventoryManager.gd"
+StockpileManager="*res://scripts/managers/StockpileManager.gd"
+HaulManager="*res://scripts/managers/HaulManager.gd"
+BuildManager="*res://scripts/managers/BuildManager.gd"
+RoomManager="*res://scripts/managers/RoomManager.gd"
+JobManager="*res://scripts/managers/JobManager.gd"
+TimeManager="*res://scripts/managers/TimeManager.gd"
+WolfManager="*res://scripts/managers/WolfManager.gd"
+SaveManager="*res://scripts/core/SaveManager.gd"
+FarmManager="*res://scripts/managers/FarmManager.gd"
+AudioManager="*res://scripts/managers/AudioManager.gd"
+
+[display]
+
+window/size/mode=3
+
+[dotnet]
+
+project/assembly_name="dagame"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"

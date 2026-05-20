@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BuildingResource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/utils/BuildingResource.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://art/buildings/wood_fence.png" id="2_icon"]
+[ext_resource type="PackedScene" path="res://scenes/Wall.tscn" id="3_scene"]
+
+[resource]
+script = ExtResource("1_script")
+name = "木栅栏"
+icon = ExtResource("2_icon")
+scene = ExtResource("3_scene")
+cost = {
+"wood": 4
+}
+type = 0
+max_health = 40.0
+blocks_arrows = false
+visual_size = 18.0

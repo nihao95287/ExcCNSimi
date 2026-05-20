@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://dbpghec656nj6"]
+
+[ext_resource type="Script" path="res://scripts/ui/BuildMenu.gd" id="1_un135"]
+[ext_resource type="FontFile" uid="uid://csxuowuljxdor" path="res://Font/ZhiMangXing-Regular.ttf" id="2_7en0g"]
+[ext_resource type="Texture2D" uid="uid://4d4u4q3k2vwp" path="res://art/Button0.png" id="3_6bvdy"]
+[ext_resource type="Texture2D" uid="uid://qblxfy757a5o" path="res://art/Button1.png" id="4_56hmn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bp64j"]
+texture = ExtResource("3_6bvdy")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dlnw2"]
+texture = ExtResource("4_56hmn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fh3ma"]
+texture = ExtResource("3_6bvdy")
+
+[node name="BuildMenu" type="Node2D" unique_id=814423279]
+script = ExtResource("1_un135")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1432595420]
+offset_left = 187.0
+offset_top = 81.0
+offset_right = 2418.0
+offset_bottom = 1444.0
+color = Color(0.19043499, 0.17125979, 0.15558803, 1)
+
+[node name="ReferenceRect" type="ReferenceRect" parent="ColorRect" unique_id=95452708]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.006
+anchor_right = 0.99700004
+anchor_bottom = 0.99100006
+offset_left = -0.69299984
+offset_top = 0.362
+offset_right = 0.6928711
+offset_bottom = -0.5430908
+border_color = Color(0.5195575, 0.51955765, 0.5195572, 1)
+border_width = 1.6
+editor_only = false
+
+[node name="Return_Button" type="Button" parent="ColorRect/ReferenceRect" unique_id=1944727928]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 1123.46
+offset_right = 349.0
+offset_bottom = 1264.46
+theme_override_fonts/font = ExtResource("2_7en0g")
+theme_override_font_sizes/font_size = 121
+theme_override_styles/normal = SubResource("StyleBoxTexture_bp64j")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_dlnw2")
+theme_override_styles/hover = SubResource("StyleBoxTexture_fh3ma")
+text = "返回"
+
+[node name="OK_Button" type="Button" parent="ColorRect/ReferenceRect" unique_id=1183353573]
+layout_mode = 0
+offset_left = 1837.0
+offset_top = 1127.46
+offset_right = 2116.0
+offset_bottom = 1251.46
+theme_override_fonts/font = ExtResource("2_7en0g")
+theme_override_font_sizes/font_size = 121
+theme_override_styles/normal = SubResource("StyleBoxTexture_bp64j")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_dlnw2")
+theme_override_styles/hover = SubResource("StyleBoxTexture_fh3ma")
+text = "确认"
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/ReferenceRect" unique_id=1221724695]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 19.46
+offset_right = 2191.0
+offset_bottom = 1075.9199
+columns = 4

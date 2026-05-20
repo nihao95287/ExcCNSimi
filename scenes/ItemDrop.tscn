@@ -1,0 +1,18 @@
+[gd_scene format=4 uid="uid://cbsx6ga6571jq"]
+
+[ext_resource type="Script" uid="uid://bgufj88y8v16y" path="res://scripts/entities/ItemDrop.gd" id="1_75j6g"]
+[ext_resource type="Texture2D" uid="uid://9c3723493066aa7fb1f354f9f8ca526b" path="res://art/objects/tree.png" id="2_wood"]
+[ext_resource type="Texture2D" uid="uid://43f676eaaa6a2797355e50ee42db199a" path="res://art/objects/rock.png" id="3_stone"]
+[ext_resource type="Texture2D" uid="uid://03affe79147d84594127269209417aae" path="res://art/animals/pig.png" id="4_meat"]
+
+[node name="ItemDrop" type="Node2D"]
+script = ExtResource("1_75j6g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+
+[node name="CircleShape2D" type="CircleShape2D" parent="./CollisionShape2D"]
+radius = 16.0

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://db5e6f7g8iai1"]
+
+[ext_resource type="Script" path="res://scripts/entities/Building.gd" id="1_building"]
+[ext_resource type="Texture2D" path="res://art/buildings/stone_door.png" id="2_icon"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_detect"]
+radius = 24.0
+
+[node name="Door" type="StaticBody2D"]
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("1_building")
+type = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_icon")
+scale = Vector2(0.2, 0.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_door")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_detect")

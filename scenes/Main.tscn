@@ -1,0 +1,32 @@
+[gd_scene format=4 uid="uid://cty1nvk7qcmxn"]
+
+[ext_resource type="Script" uid="uid://cusn0kirt2lh0" path="res://scripts/ui/Node2D.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://dr8mympohlacu" path="res://scripts/world/Map.gd" id="2_map"]
+[ext_resource type="Script" uid="uid://ci1bbvbf76hcw" path="res://scripts/ui/CameraController.gd" id="3_camera"]
+[ext_resource type="Texture2D" uid="uid://ciyreid5yrny0" path="res://art/art_test.png" id="4_tileset"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_terrain"]
+texture = ExtResource("4_tileset")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_terrain"]
+sources/0 = SubResource("TileSetAtlasSource_terrain")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_terrain")
+script = ExtResource("2_map")
+mapWidth = 256
+mapHeight = 256
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_camera")

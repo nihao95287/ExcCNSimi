@@ -1,0 +1,14 @@
+[gd_scene format=4 uid="uid://ekct621gt4ij"]
+
+[ext_resource type="Script" uid="uid://c1a2b3c4d5e6f" path="res://scripts/entities/Villager.gd" id="1_villager"]
+[ext_resource type="Texture2D" uid="uid://854378ddce3e33316cd3db8926d0400d" path="res://art/characters/villager.png" id="2_villager_tex"]
+
+[node name="Villager" type="CharacterBody2D"]
+script = ExtResource("1_villager")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_villager_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

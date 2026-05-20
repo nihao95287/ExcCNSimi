@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BuildingResource" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/utils/BuildingResource.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://art/buildings/torch.svg" id="2_icon"]
+[ext_resource type="PackedScene" path="res://scenes/Wall.tscn" id="3_scene"]
+
+[resource]
+script = ExtResource("1_script")
+name = "火把"
+icon = ExtResource("2_icon")
+scene = ExtResource("3_scene")
+cost = {
+"fiber": 4,
+"wood": 8
+}
+type = 2
+visual_size = 20.0
+provides_light = true
+light_radius = 1.45
+light_energy_day = 0.1
+light_energy_night = 0.65

@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://btp46h8ot1jgy"]
+
+[ext_resource type="Script" uid="uid://drdleee5n34kk" path="res://example/menu.gd" id="1_dlksc"]
+[ext_resource type="Texture2D" uid="uid://dhyvvhexpuija" path="res://art/Menu/Menu_0.png" id="1_uubjt"]
+[ext_resource type="Texture2D" uid="uid://4d4u4q3k2vwp" path="res://art/Button0.png" id="2_5yleq"]
+[ext_resource type="FontFile" uid="uid://csxuowuljxdor" path="res://Font/ZhiMangXing-Regular.ttf" id="2_n4eug"]
+[ext_resource type="Texture2D" uid="uid://qblxfy757a5o" path="res://art/Button1.png" id="3_ylpcl"]
+[ext_resource type="Texture2D" uid="uid://d3yiwbgx5r1me" path="res://art/Menu/Title.png" id="4_cx167"]
+[ext_resource type="Texture2D" uid="uid://dp6c34wx868o3" path="res://art/Menu/18-.png" id="6_dlksc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ylpcl"]
+texture = ExtResource("2_5yleq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cx167"]
+texture = ExtResource("3_ylpcl")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5yleq"]
+texture = ExtResource("2_5yleq")
+
+[sub_resource type="ImageTexture" id="ImageTexture_cx167"]
+
+[node name="Node2D" type="Node2D" unique_id=2048817867]
+script = ExtResource("1_dlksc")
+
+[node name="BackRect" type="TextureRect" parent="." unique_id=1498150519]
+anchors_preset = -1
+offset_left = 10.0
+offset_top = -3.0
+offset_right = 2740.0
+offset_bottom = 1532.0
+texture = ExtResource("1_uubjt")
+stretch_mode = 4
+
+[node name="Start_Button" type="Button" parent="BackRect" unique_id=515106227]
+layout_mode = 0
+offset_left = 1948.0001
+offset_top = 323.00003
+offset_right = 2275.0
+offset_bottom = 447.00003
+scale = Vector2(1.205, 1.205)
+theme_override_fonts/font = ExtResource("2_n4eug")
+theme_override_font_sizes/font_size = 69
+theme_override_styles/normal = SubResource("StyleBoxTexture_ylpcl")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_cx167")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5yleq")
+text = "开天辟地"
+icon = SubResource("ImageTexture_cx167")
+
+[node name="Continue_Button" type="Button" parent="BackRect" unique_id=137376428]
+layout_mode = 0
+offset_left = 1948.0001
+offset_top = 499.00003
+offset_right = 2275.0
+offset_bottom = 623.0
+scale = Vector2(1.205, 1.205)
+theme_override_fonts/font = ExtResource("2_n4eug")
+theme_override_font_sizes/font_size = 69
+theme_override_styles/normal = SubResource("StyleBoxTexture_ylpcl")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_cx167")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5yleq")
+text = "再续前程"
+icon = SubResource("ImageTexture_cx167")
+
+[node name="Settings_Button" type="Button" parent="BackRect" unique_id=229584398]
+layout_mode = 0
+offset_left = 1948.0001
+offset_top = 683.00006
+offset_right = 2275.0
+offset_bottom = 807.00006
+scale = Vector2(1.205, 1.205)
+theme_override_fonts/font = ExtResource("2_n4eug")
+theme_override_font_sizes/font_size = 69
+theme_override_styles/normal = SubResource("StyleBoxTexture_ylpcl")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_cx167")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5yleq")
+text = "乾坤再造"
+icon = SubResource("ImageTexture_cx167")
+
+[node name="Exit_Button" type="Button" parent="BackRect" unique_id=2073468697]
+layout_mode = 0
+offset_left = 1950.0001
+offset_top = 875.00006
+offset_right = 2277.0
+offset_bottom = 999.00006
+scale = Vector2(1.205, 1.205)
+theme_override_fonts/font = ExtResource("2_n4eug")
+theme_override_font_sizes/font_size = 69
+theme_override_styles/normal = SubResource("StyleBoxTexture_ylpcl")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_cx167")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5yleq")
+text = "退隐江湖"
+icon = SubResource("ImageTexture_cx167")
+
+[node name="TitleRect" type="TextureRect" parent="BackRect" unique_id=1645985259]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 31.0
+offset_top = 112.0
+offset_right = 1376.0
+offset_bottom = 523.0
+texture = ExtResource("4_cx167")
+expand_mode = 1
+
+[node name="18+" type="TextureRect" parent="BackRect" unique_id=76837225]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 1255.0
+offset_right = 304.0
+offset_bottom = 1478.0
+texture = ExtResource("6_dlksc")
+expand_mode = 1

@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://duwqn687cmuvw"]
+
+[ext_resource type="Script" uid="uid://bg5pecmcbgb26" path="res://example/map_data.gd" id="1_f83xy"]
+[ext_resource type="FontFile" uid="uid://csxuowuljxdor" path="res://Font/ZhiMangXing-Regular.ttf" id="1_jm8nt"]
+[ext_resource type="Texture2D" uid="uid://duu4ldm35pejx" path="res://art/Map/MountainSnow.png" id="1_nslk6"]
+[ext_resource type="Texture2D" uid="uid://5401kg2ucop5" path="res://art/Map/GrassFlat.png" id="2_f83xy"]
+[ext_resource type="Texture2D" uid="uid://4d4u4q3k2vwp" path="res://art/Button0.png" id="2_s2igk"]
+[ext_resource type="Texture2D" uid="uid://qblxfy757a5o" path="res://art/Button1.png" id="3_4webh"]
+[ext_resource type="Texture2D" uid="uid://b6cyerjkq002n" path="res://art/Map/Forest.png" id="3_5fybe"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nslk6"]
+texture = ExtResource("2_s2igk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f83xy"]
+texture = ExtResource("3_4webh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5fybe"]
+texture = ExtResource("2_s2igk")
+
+[node name="Node2D" type="Node2D" unique_id=694458884]
+script = ExtResource("1_f83xy")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1820083292]
+offset_left = 187.0
+offset_top = 81.0
+offset_right = 2418.0
+offset_bottom = 1444.0
+color = Color(0.19043499, 0.17125979, 0.15558803, 1)
+
+[node name="ReferenceRect" type="ReferenceRect" parent="ColorRect" unique_id=1679313348]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.006
+anchor_right = 0.99700004
+anchor_bottom = 0.99100006
+offset_left = -0.69299984
+offset_top = 0.362
+offset_right = 0.6928711
+offset_bottom = -0.5430908
+border_color = Color(0.5195575, 0.51955765, 0.5195572, 1)
+border_width = 1.6
+editor_only = false
+
+[node name="TextureRect2" type="TextureRect" parent="ColorRect/ReferenceRect" unique_id=871224041]
+layout_mode = 0
+offset_left = 1479.0
+offset_top = 213.45999
+offset_right = 1980.0
+offset_bottom = 680.45996
+texture = ExtResource("1_nslk6")
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/ReferenceRect" unique_id=915311828]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 213.45999
+offset_right = 681.0
+offset_bottom = 680.45996
+texture = ExtResource("2_f83xy")
+
+[node name="TextureRect1" type="TextureRect" parent="ColorRect/ReferenceRect" unique_id=541630342]
+layout_mode = 0
+offset_left = 823.0
+offset_top = 215.45999
+offset_right = 1324.0
+offset_bottom = 682.45996
+texture = ExtResource("3_5fybe")
+
+[node name="Return_Button" type="Button" parent="ColorRect/ReferenceRect" unique_id=1475669961]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 1123.46
+offset_right = 349.0
+offset_bottom = 1264.46
+theme_override_fonts/font = ExtResource("1_jm8nt")
+theme_override_font_sizes/font_size = 121
+theme_override_styles/normal = SubResource("StyleBoxTexture_nslk6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_f83xy")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5fybe")
+text = "返回"
+
+[node name="OK_Button" type="Button" parent="ColorRect/ReferenceRect" unique_id=1788653819]
+layout_mode = 0
+offset_left = 1837.0
+offset_top = 1127.46
+offset_right = 2116.0
+offset_bottom = 1251.46
+theme_override_fonts/font = ExtResource("1_jm8nt")
+theme_override_font_sizes/font_size = 121
+theme_override_styles/normal = SubResource("StyleBoxTexture_nslk6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_f83xy")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5fybe")
+text = "确认
+"
+
+[node name="Label" type="Label" parent="ColorRect/ReferenceRect" unique_id=1786121098]
+layout_mode = 0
+offset_left = 1509.0
+offset_top = 735.46
+offset_right = 1985.0
+offset_bottom = 925.46
+theme_override_fonts/font = ExtResource("1_jm8nt")
+theme_override_font_sizes/font_size = 189
+text = "雪山"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="ColorRect/ReferenceRect" unique_id=756574271]
+layout_mode = 0
+offset_left = 820.0
+offset_top = 738.46
+offset_right = 1296.0
+offset_bottom = 928.46
+theme_override_fonts/font = ExtResource("1_jm8nt")
+theme_override_font_sizes/font_size = 189
+text = "森林"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="ColorRect/ReferenceRect" unique_id=347899690]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 737.46
+offset_right = 667.0
+offset_bottom = 927.46
+theme_override_fonts/font = ExtResource("1_jm8nt")
+theme_override_font_sizes/font_size = 189
+text = "草原"
+horizontal_alignment = 1

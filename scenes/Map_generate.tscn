@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bfpae87orb2wu"]
+
+[ext_resource type="Script" uid="uid://cmxdid43brykf" path="res://scripts/world/Map.gd" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://ciyreid5yrny0" path="res://art/art_test.png" id="2_art"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_terrain"]
+texture = ExtResource("2_art")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_terrain"]
+sources/0 = SubResource("TileSetAtlasSource_terrain")
+
+[node name="Node2D" type="Node2D" unique_id=650050264]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=873983035]
+position = Vector2(1132, 1165)
+tile_set = SubResource("TileSet_terrain")
+script = ExtResource("1_wtcfe")
+
+[node name="Pathfinding" type="Node" parent="." unique_id=581353057]

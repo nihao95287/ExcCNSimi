@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c5w2x3p4r5q6s"]
+
+[ext_resource type="Script" uid="uid://d5e6f7g8h9i0j" path="res://scripts/entities/Building.gd" id="1_building"]
+[ext_resource type="Texture2D" uid="uid://biyreid5yrny0" path="res://icon.svg" id="2_icon"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(16, 16)
+
+[node name="Wall" type="StaticBody2D"]
+script = ExtResource("1_building")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.5, 0.5, 0.5, 1)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_icon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wall")
