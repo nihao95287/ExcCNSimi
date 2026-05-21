@@ -1,5 +1,8 @@
 extends Node2D
 
+var DEBUG_NODE2D_LOGS: bool:
+	get: return SettingsManager.settings.get("debug_logs", false)
+
 var camera: Camera2D
 var selected_villager: Node2D = null
 var is_building_stockpile: bool = false
@@ -95,10 +98,11 @@ var TUTORIAL_STEPS = [
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	print("=== Node2D._ready() 开始 ===")
-	print("  Main节点路径: ", get_path())
-	print("  是否在树中: ", is_inside_tree())
-	print("  父节点: ", get_parent())
+	if DEBUG_NODE2D_LOGS:
+		print("=== Node2D._ready() 开始 ===")
+		print("  Main节点路径: ", get_path())
+		print("  是否在树中: ", is_inside_tree())
+		print("  父节点: ", get_parent())
 	_show_loading_overlay()
 	
 	canvas_modulate = CanvasModulate.new()
@@ -113,10 +117,12 @@ func _ready() -> void:
 	stockpile_preview_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	stockpile_preview_panel.z_index = 10
 	stockpile_preview_panel.visible = false
-	print("1. stockpile_preview_panel创建完成")
+	if DEBUG_NODE2D_LOGS:
+		print("1. stockpile_preview_panel创建完成")
 	
 	_build_ui()
-	print("2. _build_ui()完成")
+	if DEBUG_NODE2D_LOGS:
+		print("2. _build_ui()完成")
 	
 	# 初始化建筑菜单
 	var build_menu_scene = load("res://scenes/BuildMenu.tscn")
@@ -147,12 +153,15 @@ func _ready() -> void:
 	
 	if has_node("TileMapLayer"):
 		$TileMapLayer.add_child(stockpile_preview_panel)
-		print("3. stockpile_preview已添加")
+		if DEBUG_NODE2D_LOGS:
+			print("3. stockpile_preview已添加")
 	
 	_build_tutorial_panel()
-	print("4. _build_tutorial_panel()完成")
+	if DEBUG_NODE2D_LOGS:
+		print("4. _build_tutorial_panel()完成")
 	_show_tutorial_step(0)
-	print("5. _show_tutorial_step()完成")
+	if DEBUG_NODE2D_LOGS:
+		print("5. _show_tutorial_step()完成")
 	
 	if not EventBus.map_generated.is_connected(_on_map_generated):
 		EventBus.map_generated.connect(_on_map_generated)
@@ -171,16 +180,19 @@ func _ready() -> void:
 	var room_mgr = get_node_or_null("/root/RoomManager")
 	if room_mgr and "rooms_updated" in room_mgr and not room_mgr.rooms_updated.is_connected(_on_rooms_updated):
 		room_mgr.rooms_updated.connect(_on_rooms_updated)
-	print("6. EventBus连接完成")
+	if DEBUG_NODE2D_LOGS:
+		print("6. EventBus连接完成")
 	
 	camera = $Camera2D
 	if camera:
 		camera.make_current()
 		camera.zoom = Vector2(2.0, 2.0)
-		print("7. 相机设置完成")
+		if DEBUG_NODE2D_LOGS:
+			print("7. 相机设置完成")
 
 func _on_map_generated(_map_type: int) -> void:
-	print("=== _on_map_generated() ===")
+	if DEBUG_NODE2D_LOGS:
+		print("=== _on_map_generated() ===")
 	if not villager_spawned:
 		villager_spawned = true
 		if pending_save_data.is_empty():
@@ -297,10 +309,13 @@ func _reset_all_managers() -> void:
 	if farm_mgr and farm_mgr.has_method("reset"):
 		farm_mgr.reset()
 
-	print("_reset_all_managers: 所有 autoload 数据已清空")
+	if DEBUG_NODE2D_LOGS:
+		print("_reset_all_managers: 所有 autoload 数据已清空")
+
 
 func _build_ui() -> void:
-	print("=== _build_ui() 开始 ===")
+	if DEBUG_NODE2D_LOGS:
+		print("=== _build_ui() 开始 ===")
 	ui_layer = CanvasLayer.new()
 	# 暂停时 UI 层依然保持激活，使暂停菜单按钮可点击
 	ui_layer.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -445,8 +460,8 @@ func _build_ui() -> void:
 	if time_mgr:
 		time_mgr.time_updated.connect(_on_time_updated)
 
-	
-	print("UI顶部栏创建完成")
+	if DEBUG_NODE2D_LOGS:
+		print("UI顶部栏创建完成")
 	
 	if not EventBus.resources_updated.is_connected(_on_resources_updated):
 		EventBus.resources_updated.connect(_on_resources_updated)
@@ -511,7 +526,8 @@ func _build_ui() -> void:
 	_build_test_menu_dialog()
 	_build_creature_menu_dialog()
 	_build_pause_menu()
-	print("=== _build_ui() 完成 ===")
+	if DEBUG_NODE2D_LOGS:
+		print("=== _build_ui() 完成 ===")
 
 func _build_tutorial_panel() -> void:
 	tut_panel = PanelContainer.new()
@@ -1239,7 +1255,8 @@ func _spawn_test_villager() -> void:
 		for other in all_vils:
 			if v != other:
 				v.social_relations[other.name] = randi() % 111 - 30 # -30 to 80
-	print("三名村民及其社会关系生成完成!")
+	if DEBUG_NODE2D_LOGS:
+		print("三名村民及其社会关系生成完成!")
 
 func select_villager(villager: Node2D) -> void:
 	if selected_villager and selected_villager != villager:
@@ -3171,7 +3188,8 @@ func _on_pause_return_menu() -> void:
 # 读档恢复
 # ============================================================
 func _restore_from_save(data: Dictionary) -> void:
-	print("=== _restore_from_save() 开始 ===")
+	if DEBUG_NODE2D_LOGS:
+		print("=== _restore_from_save() 开始 ===")
 	var tilemap = get_node_or_null("TileMapLayer")
 
 	# --- 0. 重置 autoload managers 的运行时数据，避免与上局叠加 ---
@@ -3297,7 +3315,8 @@ func _restore_from_save(data: Dictionary) -> void:
 	tutorial_active = false
 	if tut_panel: tut_panel.visible = false
 
-	print("=== _restore_from_save() 完成 ===")
+	if DEBUG_NODE2D_LOGS:
+		print("=== _restore_from_save() 完成 ===")
 
 func _restore_stockpile_visual(tilemap: Node, cell: Vector2i) -> void:
 	if not tilemap: return

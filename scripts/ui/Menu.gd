@@ -1,12 +1,17 @@
 extends Node2D
 
+var DEBUG_MENU_LOGS: bool:
+	get: return SettingsManager.settings.get("debug_logs", false)
+
 func _ready() -> void:
-	print("=== Menu._ready() ===")
+	if DEBUG_MENU_LOGS:
+		print("=== Menu._ready() ===")
 	$CenterContainer/VBox/Start_Button.pressed.connect(_on_start_button_pressed)
 	$CenterContainer/VBox/Continue_Button.pressed.connect(_on_continue_button_pressed)
 	$CenterContainer/VBox/Settings_Button.pressed.connect(_on_settings_button_pressed)
 	$CenterContainer/VBox/Exit_Button.pressed.connect(_on_exit_button_pressed)
-	print("Menu按钮已连接")
+	if DEBUG_MENU_LOGS:
+		print("Menu按钮已连接")
 
 	# 播放菜单 BGM
 	if EventBus:
@@ -22,34 +27,40 @@ func _ready() -> void:
 		continue_btn.modulate = Color(0.6, 0.6, 0.6, 0.75)
 
 func _on_start_button_pressed() -> void:
-	print("=== 开始游戏按钮被点击 ===")
+	if DEBUG_MENU_LOGS:
+		print("=== 开始游戏按钮被点击 ===")
 	var map_data_scene = load("res://scenes/MapData.tscn")
 	if map_data_scene:
-		print("创建MapData场景...")
+		if DEBUG_MENU_LOGS:
+			print("创建MapData场景...")
 		var overlay = map_data_scene.instantiate()
 		add_child(overlay)
-		print("MapData已添加为子节点")
+		if DEBUG_MENU_LOGS:
+			print("MapData已添加为子节点")
 	else:
-		print("错误：无法加载MapData场景")
+		push_error("错误：无法加载MapData场景")
 
 func _on_continue_button_pressed() -> void:
-	print("=== 继续游戏按钮被点击 ===")
+	if DEBUG_MENU_LOGS:
+		print("=== 继续游戏按钮被点击 ===")
 	var save_mgr = get_node_or_null("/root/SaveManager")
 	if not save_mgr or not save_mgr.has_save():
-		print("没有存档，无法继续")
+		if DEBUG_MENU_LOGS:
+			print("没有存档，无法继续")
 		# 临时显示一个提示 Label
 		_show_no_save_hint()
 		return
 
 	var data = save_mgr.load_save()
 	if data.is_empty():
-		print("存档读取失败")
+		if DEBUG_MENU_LOGS:
+			print("存档读取失败")
 		return
 
 	# 加载 Main 场景
 	var main_scene = load("res://scenes/Main.tscn")
 	if not main_scene:
-		print("错误：无法加载 Main.tscn")
+		push_error("错误：无法加载 Main.tscn")
 		return
 
 	var main_instance = main_scene.instantiate()
@@ -90,17 +101,19 @@ func _on_continue_button_pressed() -> void:
 	for n in to_free:
 		n.queue_free()
 
-	print("=== 读档完成，已跳转到游戏场景 ===")
+	if DEBUG_MENU_LOGS:
+		print("=== 读档完成，已跳转到游戏场景 ===")
 
 func _on_settings_button_pressed() -> void:
-	print("=== 设置按钮被点击 ===")
+	if DEBUG_MENU_LOGS:
+		print("=== 设置按钮被点击 ===")
 	var settings_script = load("res://scripts/ui/SettingsMenu.gd")
 	if settings_script:
 		var settings_ui = CanvasLayer.new()
 		settings_ui.set_script(settings_script)
 		add_child(settings_ui)
 	else:
-		print("错误：无法加载 SettingsMenu.gd")
+		push_error("错误：无法加载 SettingsMenu.gd")
 
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()

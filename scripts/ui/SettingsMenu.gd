@@ -49,6 +49,9 @@ func _build_ui() -> void:
 	_add_volume_slider(vbox, "音效", "sfx_volume")
 	_add_volume_slider(vbox, "环境音", "ambient_volume")
 	
+	# 调试设置
+	_add_debug_toggle(vbox)
+	
 	# 关闭按钮
 	var close_btn = Button.new()
 	close_btn.text = "返回"
@@ -73,3 +76,17 @@ func _add_volume_slider(container: VBoxContainer, label_text: String, setting_ke
 	slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	slider.value_changed.connect(func(value): SettingsManager.set_setting(setting_key, value))
 	hbox.add_child(slider)
+
+func _add_debug_toggle(container: VBoxContainer) -> void:
+	var hbox = HBoxContainer.new()
+	container.add_child(hbox)
+	
+	var label = Label.new()
+	label.text = "显示调试日志"
+	label.custom_minimum_size = Vector2(100, 0)
+	hbox.add_child(label)
+	
+	var toggle = CheckButton.new()
+	toggle.button_pressed = SettingsManager.settings.get("debug_logs", false)
+	toggle.toggled.connect(func(value): SettingsManager.set_setting("debug_logs", value))
+	hbox.add_child(toggle)
