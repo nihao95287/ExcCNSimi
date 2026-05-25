@@ -6,7 +6,8 @@ var settings: Dictionary = {
 	"master_volume": 0.8,
 	"bgm_volume": 0.8,
 	"sfx_volume": 0.8,
-	"ambient_volume": 0.8
+	"ambient_volume": 0.8,
+	"debug_logs": false
 }
 
 func _ready() -> void:

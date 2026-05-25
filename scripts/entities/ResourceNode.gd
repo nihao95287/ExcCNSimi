@@ -11,11 +11,10 @@ var current_health: float
 var grid_coord: Vector2i
 
 const ITEM_DROP_SCENE = preload("res://scenes/ItemDrop.tscn")
-const DEBUG_RESOURCE_NODE_LOGS := false
+var DEBUG_RESOURCE_NODE_LOGS: bool:
+	get: return SettingsManager.settings.get("debug_logs", false)
 
 func _ready() -> void:
-	if DEBUG_RESOURCE_NODE_LOGS:
-		print("ResourceNode._ready() - name=", name, " type=", type, " script=", get_script())
 	current_health = max_health
 	input_pickable = true
 
@@ -64,7 +63,8 @@ func _ready() -> void:
 	add_child(collision)
 
 func gather(amount: float, gatherer: Node2D) -> bool:
-	print("ResourceNode.gather() 被调用! current_health=", current_health, " amount=", amount, " name=", name)
+	if DEBUG_RESOURCE_NODE_LOGS:
+		print("ResourceNode.gather() 被调用! current_health=", current_health, " amount=", amount, " name=", name)
 	current_health -= amount
 	
 	# 触发采集音效信号
@@ -74,33 +74,41 @@ func gather(amount: float, gatherer: Node2D) -> bool:
 	scale = Vector2(0.9, 0.9)
 	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.2)
 
-	print("  扣除后 current_health=", current_health)
+	if DEBUG_RESOURCE_NODE_LOGS:
+		print("  扣除后 current_health=", current_health)
 	if current_health <= 0:
-		print("  生命值 <= 0，调用 _on_destroyed()")
+		if DEBUG_RESOURCE_NODE_LOGS:
+			print("  生命值 <= 0，调用 _on_destroyed()")
 		_on_destroyed()
-		print("  _on_destroyed() 执行完毕，当前节点是否有效: ", is_instance_valid(self))
+		if DEBUG_RESOURCE_NODE_LOGS:
+			print("  _on_destroyed() 执行完毕，当前节点是否有效: ", is_instance_valid(self))
 		return true
 
 	return false
 
 func _on_destroyed() -> void:
-	print("ResourceNode: _on_destroyed() 被调用!")
-	print("  - type: ", type)
-	print("  - gather_yield: ", gather_yield)
-	print("  - grid_coord: ", grid_coord)
-	print("  - global_position: ", global_position)
+	if DEBUG_RESOURCE_NODE_LOGS:
+		print("ResourceNode: _on_destroyed() 被调用!")
+		print("  - type: ", type)
+		print("  - gather_yield: ", gather_yield)
+		print("  - grid_coord: ", grid_coord)
+		print("  - global_position: ", global_position)
 
 	var parent = get_parent()
-	print("  - parent: ", parent)
+	if DEBUG_RESOURCE_NODE_LOGS:
+		print("  - parent: ", parent)
 	if parent and parent.has_method("remove_solid"):
 		parent.remove_solid(grid_coord)
 
 	# 生成物品掉落
-	print("  - 尝试生成物品掉落...")
+	if DEBUG_RESOURCE_NODE_LOGS:
+		print("  - 尝试生成物品掉落...")
 	if gather_yield > 0:
-		print("  - ITEM_DROP_SCENE: ", ITEM_DROP_SCENE)
+		if DEBUG_RESOURCE_NODE_LOGS:
+			print("  - ITEM_DROP_SCENE: ", ITEM_DROP_SCENE)
 		var drop = ITEM_DROP_SCENE.instantiate()
-		print("  - drop: ", drop)
+		if DEBUG_RESOURCE_NODE_LOGS:
+			print("  - drop: ", drop)
 		if drop:
 			drop.type = type
 			drop.amount = gather_yield
@@ -109,20 +117,23 @@ func _on_destroyed() -> void:
 			drop.global_position = global_position + Vector2(16, 16)
 			if parent:
 				parent.add_child(drop)
-				print("  - ItemDrop已添加，位置: ", drop.global_position)
-				print("  - ItemDrop子节点数: ", drop.get_child_count())
-				for i in range(drop.get_child_count()):
-					var child = drop.get_child(i)
-					print("    子节点", i, ": ", child.name, " type=", child.get_class())
+				if DEBUG_RESOURCE_NODE_LOGS:
+					print("  - ItemDrop已添加，位置: ", drop.global_position)
+					print("  - ItemDrop子节点数: ", drop.get_child_count())
+					for i in range(drop.get_child_count()):
+						var child = drop.get_child(i)
+						print("    子节点", i, ": ", child.name, " type=", child.get_class())
 				EventBus.item_dropped.emit(drop, type, gather_yield)
-				print("  - 物品掉落已生成并添加到场景")
+				if DEBUG_RESOURCE_NODE_LOGS:
+					print("  - 物品掉落已生成并添加到场景")
 
 	EventBus.resource_destroyed.emit(type)
 	EventBus.resource_node_removed.emit(type, grid_coord.x, grid_coord.y)
-	print("  - 调用 queue_free()，资源节点将被释放")
-	print("  - 资源节点名称: ", name, " 类型: ", get_class())
-	print("  - 资源节点父节点: ", get_parent())
-	# 直接释放资源节点，不需要延迟
-	print("  - 调用 queue_free() 之前，is_inside_tree(): ", is_inside_tree())
+	if DEBUG_RESOURCE_NODE_LOGS:
+		print("  - 调用 queue_free()，资源节点将被释放")
+		print("  - 资源节点名称: ", name, " 类型: ", get_class())
+		print("  - 资源节点父节点: ", get_parent())
+		print("  - 调用 queue_free() 之前，is_inside_tree(): ", is_inside_tree())
 	queue_free()
-	print("  - queue_free() 已调用")
+	if DEBUG_RESOURCE_NODE_LOGS:
+		print("  - queue_free() 已调用")

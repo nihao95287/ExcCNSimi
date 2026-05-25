@@ -4,6 +4,9 @@ extends CharacterBody2D
 @export var move_speed: float = 200.0
 @export var gather_speed: float = 1.0
 
+var DEBUG_VILLAGER_LOGS: bool:
+	get: return SettingsManager.settings.get("debug_logs", false)
+
 const REACH_THRESHOLD: float = 8.0
 const STUCK_REPATH_TIME: float = 0.8
 const STUCK_MIN_PROGRESS: float = 1.0
@@ -1053,7 +1056,8 @@ func _follow_attack_target(delta: float) -> void:
 
 func _handle_gathering(delta: float) -> void:
 	if not is_instance_valid(target_resource):
-		print("村民: 目标资源无效，任务完成")
+		if DEBUG_VILLAGER_LOGS:
+			print("村民: 目标资源无效，任务完成")
 		current_task = Task.IDLE
 		if tool_sprite: tool_sprite.visible = false
 		_event_bus.villager_task_completed.emit(self)
@@ -1085,10 +1089,12 @@ func _handle_gathering(delta: float) -> void:
 		if gather_timer >= gather_speed:
 			gather_timer = 0.0
 			if target_resource.has_method("gather"):
-				print("村民: 采集资源 - 剩余生命值: ", target_resource.current_health)
+				if DEBUG_VILLAGER_LOGS:
+					print("村民: 采集资源 - 剩余生命值: ", target_resource.current_health)
 				var done = target_resource.gather(30.0, self)
 				if done:
-					print("村民: 资源已被采集完毕")
+					if DEBUG_VILLAGER_LOGS:
+						print("村民: 资源已被采集完毕")
 					var job_mgr = get_node_or_null("/root/JobManager")
 					if job_mgr: job_mgr.remove_job(target_resource)
 					current_task = Task.IDLE
@@ -1097,7 +1103,8 @@ func _handle_gathering(delta: float) -> void:
 					_event_bus.villager_task_completed.emit(self)
 					_event_bus.villager_idle.emit(self)
 	else:
-		print("村民: 距离资源太远，无法采集 - 距离: ", dist_to_res)
+		if DEBUG_VILLAGER_LOGS:
+			print("村民: 距离资源太远，无法采集 - 距离: ", dist_to_res)
 
 func _get_tool_level_for_resource(resource: Node2D) -> int:
 	if not is_instance_valid(resource):

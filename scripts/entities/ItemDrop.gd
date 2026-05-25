@@ -1,6 +1,9 @@
 class_name ItemDrop
 extends Node2D
 
+var DEBUG_ITEM_DROP_LOGS: bool:
+	get: return SettingsManager.settings.get("debug_logs", false)
+
 @export var type: int = 0
 @export var amount: int = 1
 @export var item_id: String = ""
@@ -9,7 +12,6 @@ var grid_coord: Vector2i
 var is_reserved: bool = false
 
 func _ready() -> void:
-	print("ItemDrop._ready() - type=", type, " amount=", amount, " item_id=", item_id, " grid_coord=", grid_coord)
 	z_index = 10
 	if not Engine.is_editor_hint():
 		var haul = get_node_or_null("/root/HaulManager")
