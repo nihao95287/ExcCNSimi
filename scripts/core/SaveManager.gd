@@ -16,9 +16,6 @@ func reset_tracking() -> void:
 func has_save() -> bool:
 	return FileAccess.file_exists(SAVE_PATH)
 
-var DEBUG_SAVE_LOGS: bool:
-	get: return SettingsManager.settings.get("debug_logs", false)
-
 func save_game(main_node: Node) -> bool:
 	var data: Dictionary = {}
 
@@ -46,8 +43,7 @@ func save_game(main_node: Node) -> bool:
 
 	file.store_string(JSON.stringify(data))
 	file.close()
-	if DEBUG_SAVE_LOGS:
-		print("SaveManager: saved -> ", SAVE_PATH)
+	print("SaveManager: saved -> ", SAVE_PATH)
 	return true
 
 func load_save() -> Dictionary:
