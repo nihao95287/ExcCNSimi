@@ -1,9 +1,6 @@
 @tool
 extends TileMapLayer
 
-var DEBUG_MAP_LOGS: bool:
-	get: return SettingsManager.settings.get("debug_logs", false)
-
 @export_group("Map Settings")
 @export var generateMap : bool :
 	set(v):
@@ -48,11 +45,10 @@ var _regen_elapsed_hours: float = 0.0
 var _regen_rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
-	if DEBUG_MAP_LOGS:
-		print("=== Map._ready() 被调用 ===")
-		print("  节点路径: ", get_path())
-		print("  是否在树中: ", is_inside_tree())
-		print("  Engine.is_editor_hint(): ", Engine.is_editor_hint())
+	print("=== Map._ready() 被调用 ===")
+	print("  节点路径: ", get_path())
+	print("  是否在树中: ", is_inside_tree())
+	print("  Engine.is_editor_hint(): ", Engine.is_editor_hint())
 	if not Engine.is_editor_hint():
 		_regen_rng.randomize()
 		call_deferred("Generate_map")
@@ -76,8 +72,7 @@ func Generate_map() -> void:
 	if _generation_in_progress:
 		return
 	_generation_in_progress = true
-	if DEBUG_MAP_LOGS:
-		print("=== Map.Generate_map() 开始 ===")
+	print("=== Map.Generate_map() 开始 ===")
 	clear_Map()
 	
 	astar_grid = AStarGrid2D.new()
@@ -133,8 +128,7 @@ func Generate_map() -> void:
 	await _generate_resources(noise, res_noise, center_coord, clear_radius)
 	await _generate_animals(noise, center_coord, clear_radius)
 	
-	if DEBUG_MAP_LOGS:
-		print("生成完成：地形、资源、动物已就绪。")
+	print("生成完成：地形、资源、动物已就绪。")
 	_generation_in_progress = false
 	_emit_map_generated()
 

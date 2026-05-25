@@ -11,9 +11,6 @@ extends Node
 ## 自动触发对应音效，实现"零侵入"音频集成。
 ## ============================================================
 
-var DEBUG_AUDIO_MANAGER_LOGS: bool:
-	get: return SettingsManager.settings.get("debug_logs", false)
-
 # --- 音频播放器池配置 ---
 const SFX_POOL_SIZE: int = 8          # 同时可叠加的音效数
 const AMBIENT_POOL_SIZE: int = 3      # 同时可叠加的环境音数
@@ -102,8 +99,7 @@ func _ready() -> void:
 
 	# 启动时播放菜单 BGM
 	play_bgm("menu")
-	if DEBUG_AUDIO_MANAGER_LOGS:
-		print("AudioManager: 初始化完成，播放菜单BGM")
+	print("AudioManager: 初始化完成，播放菜单BGM")
 
 
 func _create_bgm_player() -> void:
@@ -201,8 +197,7 @@ func play_sfx_varied(sfx_name: String, volume_db: float = 0.0) -> void:
 
 ## 切换 BGM（带淡入淡出）
 func play_bgm(bgm_name: String, fade_duration: float = 1.0) -> void:
-	if DEBUG_AUDIO_MANAGER_LOGS:
-		print("AudioManager: 尝试播放 BGM -> ", bgm_name)
+	print("AudioManager: 尝试播放 BGM -> ", bgm_name)
 	
 	# 如果切换回菜单，自动停止所有环境音
 	if bgm_name == "menu":
@@ -211,7 +206,7 @@ func play_bgm(bgm_name: String, fade_duration: float = 1.0) -> void:
 
 	var stream = _load_stream(bgm_registry.get(bgm_name, ""))
 	if not stream:
-		push_warning("AudioManager: 找不到 BGM 资源: ", bgm_name)
+		print("AudioManager: 错误 - 找不到 BGM 资源: ", bgm_name)
 		return
 
 	# 如果已经在播放同一首，忽略
@@ -320,7 +315,7 @@ func _load_stream(path: String) -> AudioStream:
 		return _stream_cache[path]
 
 	if not ResourceLoader.exists(path):
-		push_warning("AudioManager: 资源路径不存在 -> ", path)
+		print("AudioManager: 资源路径不存在 -> ", path)
 		# 音频文件尚未放入项目时静默跳过，不报错不崩溃
 		return null
 
@@ -381,8 +376,7 @@ func _on_resource_collected(resource_type: int, _amount: int) -> void:
 	pass
 
 func _on_resource_hit(resource_type: int) -> void:
-	if DEBUG_AUDIO_MANAGER_LOGS:
-		print("AudioManager: 收到资源打击信号, type=", resource_type)
+	print("AudioManager: 收到资源打击信号, type=", resource_type)
 	match resource_type:
 		0:  # WOOD
 			play_sfx_varied("chop")
@@ -406,8 +400,7 @@ func _on_animal_killed(_species: String) -> void:
 	play_sfx("animal_death")
 
 func _on_animal_hit(species: String) -> void:
-	if DEBUG_AUDIO_MANAGER_LOGS:
-		print("AudioManager: 收到动物受击信号, species=", species)
+	print("AudioManager: 收到动物受击信号, species=", species)
 	match species:
 		"pig":
 			play_sfx_varied("pig_hit")
@@ -455,8 +448,7 @@ func _on_map_generated(map_type: int) -> void:
 	
 	# 根据地图类型播放环境音
 	var ambient_key = "map_%d" % map_type
-	if DEBUG_AUDIO_MANAGER_LOGS:
-		print("AudioManager: 收到地图生成信号, type=", map_type, " 尝试播放环境音: ", ambient_key)
+	print("AudioManager: 收到地图生成信号, type=", map_type, " 尝试播放环境音: ", ambient_key)
 	if ambient_registry.has(ambient_key):
 		play_ambient(ambient_key)
 	
